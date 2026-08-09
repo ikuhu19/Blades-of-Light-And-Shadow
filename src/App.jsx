@@ -15,13 +15,20 @@ const App = () => {
   // Handle the Music
   const toggleMusic = () => {
     if (!audioRef.current) return;
-    
+
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play().catch(err => console.log("Audio Error:", err));
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(err => {
+          console.log("Audio Error:", err);
+        });
     }
-    setIsPlaying(!isPlaying);
   };
 
   // Handle the Midnight Theme
@@ -50,8 +57,13 @@ const App = () => {
   return (
     <>
       {/* Hidden Audio Player - MUST be here for sound to work */}
-      <audio ref={audioRef} src="/tune.mp3.mp3.mp3" loop />
-      
+      <audio
+        ref={audioRef}
+        src="/blades-of-light-shadow/tune.mp3.mp3.mp3"
+        loop
+        preload="auto"
+      />
+
       {/* The Ancient Heavy Mist */}
       <div className="ancient-fog"></div>
 
@@ -63,13 +75,28 @@ const App = () => {
       </div>
       
       {/* Global Control Buttons - Inline styles force perfect layout */}
-      <div style={{ position: 'fixed', top: '2rem', right: '2rem', display: 'flex', gap: '1rem', zIndex: 100, alignItems: 'center' }}>
-        
+      <div
+        style={{
+          position: 'fixed',
+          top: '2rem',
+          right: '2rem',
+          display: 'flex',
+          gap: '1rem',
+          zIndex: 100,
+          alignItems: 'center'
+        }}
+      >
         <button 
           className="theme-toggle-btn" 
           onClick={toggleTheme}
           aria-label="Toggle Midnight Mode"
-          style={{ position: 'relative', margin: 0, height: '32px', display: 'flex', alignItems: 'center' }}
+          style={{
+            position: 'relative',
+            margin: 0,
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center'
+          }}
         >
           {isMidnight ? '☀' : '☾'}
         </button>
@@ -78,11 +105,16 @@ const App = () => {
           className="music-toggle-btn" 
           onClick={toggleMusic}
           aria-label="Toggle Background Music"
-          style={{ position: 'relative', margin: 0, height: '32px', display: 'flex', alignItems: 'center' }}
+          style={{
+            position: 'relative',
+            margin: 0,
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center'
+          }}
         >
           {isPlaying ? '☽ SILENCE' : '♫ SUMMON TUNE'}
         </button>
-        
       </div>
 
       {/* The Manuscript Pages */}
