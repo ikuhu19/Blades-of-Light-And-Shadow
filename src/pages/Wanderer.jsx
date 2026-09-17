@@ -2,8 +2,9 @@ import React from 'react';
 import RedDiamondBtn from '../components/RedDiamondBtn';
 import ChapterTitle from '../components/ChapterTitle';
 import Rune from '../components/Rune';
+import OwlCanvas from '../components/OwlCanvas';
 
-const Wanderer = ({ onNextPage }) => {
+const Wanderer = ({ onNextPage, isMidnight }) => {
   return (
     <div className="manuscript-viewport">
       <main className="wanderer-container">
@@ -17,10 +18,10 @@ const Wanderer = ({ onNextPage }) => {
         {/* Core Narrative & Illustration Section */}
         <section className="wanderer-main-grid">
           
-          {/* Left: Illustration Frame */}
+          {/* Left: Illustration Frame with 3D Guardian Owl */}
           <div className="illustration-frame">
-            <div className="illustration-placeholder">
-              <span className="owl-symbol">🦉</span>
+            <div className="illustration-placeholder owl-3d-stage">
+              <OwlCanvas isMidnight={isMidnight} />
               <p className="frame-caption">The Traveler at the Crossroads</p>
             </div>
           </div>

@@ -3,7 +3,7 @@ import RedDiamondBtn from '../components/RedDiamondBtn';
 import ChapterTitle from '../components/ChapterTitle';
 import Rune from '../components/Rune';
 
-const Prologue = ({ onNextPage }) => {
+const Prologue = ({ onNextPage, onOpenMap, isPlaying, onStartMusic }) => {
   return (
     <div className="manuscript-viewport">
       <main className="prologue-container">
@@ -43,13 +43,40 @@ const Prologue = ({ onNextPage }) => {
           </p>
         </article>
 
+        {/* Ambient Sound Invitation (if music not yet playing) */}
+        {!isPlaying && onStartMusic && (
+          <div className="prologue-music-invitation">
+            <button
+              className="prologue-summon-btn"
+              onClick={onStartMusic}
+              aria-label="Begin Journey and summon background soundtrack"
+            >
+              <span className="summon-icon">♫</span>
+              <span>BEGIN JOURNEY • AWAKEN SOUNDTRACK</span>
+            </button>
+          </div>
+        )}
+
       </main>
 
-      {/* Red Diamond Navigation Button */}
-      <RedDiamondBtn 
-        label="TURN THE PAGE" 
-        onClick={onNextPage} 
-      />
+      {/* Choice Moment Navigation */}
+      <div className="prologue-choice-row">
+        <RedDiamondBtn 
+          label="TURN THE PAGE" 
+          onClick={onNextPage} 
+        />
+
+        {onOpenMap && (
+          <button
+            className="secondary-choice-btn"
+            onClick={onOpenMap}
+            aria-label="Consult the Chronicle Index"
+          >
+            <span className="choice-sigil">⚜</span>
+            <span className="choice-label">CONSULT THE CHRONICLE</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 };

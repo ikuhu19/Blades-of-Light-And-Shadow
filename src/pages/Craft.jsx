@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RedDiamondBtn from '../components/RedDiamondBtn';
 import ChapterTitle from '../components/ChapterTitle';
 import Rune from '../components/Rune';
 
 const Craft = ({ onNextPage }) => {
+  const [activeDiscipline, setActiveDiscipline] = useState('ALL');
+
   return (
     <div className="manuscript-viewport">
       <main className="craft-container">
@@ -27,8 +29,23 @@ const Craft = ({ onNextPage }) => {
         <section className="craft-arsenal">
           <h2 className="record-heading">THE ARSENAL OF ARTIFACTS</h2>
           
+          {/* Interactive Discipline Choice Filter */}
+          <div className="craft-choice-filter" role="tablist" aria-label="Discipline Filter">
+            {['ALL', 'RUNES OF COMMAND', "ARCHITECT'S TOOLS", 'VAULT & SANCTUM', 'FORGE DISCIPLINE'].map((cat) => (
+              <button
+                key={cat}
+                className={`choice-pill ${activeDiscipline === cat ? 'active' : ''}`}
+                onClick={() => setActiveDiscipline(cat)}
+                role="tab"
+                aria-selected={activeDiscipline === cat}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
           <div className="arsenal-grid">
-            <div className="arsenal-card">
+            <div className={`arsenal-card ${activeDiscipline === 'ALL' || activeDiscipline === 'RUNES OF COMMAND' ? 'highlighted' : 'dimmed'}`}>
               <h3 className="arsenal-category">RUNES OF COMMAND</h3>
               <p className="arsenal-subtitle">Programming Languages</p>
               <ul className="artifact-list">
@@ -38,7 +55,7 @@ const Craft = ({ onNextPage }) => {
               </ul>
             </div>
 
-            <div className="arsenal-card">
+            <div className={`arsenal-card ${activeDiscipline === 'ALL' || activeDiscipline === "ARCHITECT'S TOOLS" ? 'highlighted' : 'dimmed'}`}>
               <h3 className="arsenal-category">THE ARCHITECT'S TOOLS</h3>
               <p className="arsenal-subtitle">Web & Frameworks</p>
               <ul className="artifact-list">
@@ -48,7 +65,7 @@ const Craft = ({ onNextPage }) => {
               </ul>
             </div>
 
-            <div className="arsenal-card">
+            <div className={`arsenal-card ${activeDiscipline === 'ALL' || activeDiscipline === 'VAULT & SANCTUM' ? 'highlighted' : 'dimmed'}`}>
               <h3 className="arsenal-category">THE VAULT & SANCTUM</h3>
               <p className="arsenal-subtitle">Databases & Systems</p>
               <ul className="artifact-list">
@@ -58,7 +75,7 @@ const Craft = ({ onNextPage }) => {
               </ul>
             </div>
 
-            <div className="arsenal-card">
+            <div className={`arsenal-card ${activeDiscipline === 'ALL' || activeDiscipline === 'FORGE DISCIPLINE' ? 'highlighted' : 'dimmed'}`}>
               <h3 className="arsenal-category">THE FORGE DISCIPLINE</h3>
               <p className="arsenal-subtitle">Core Computer Science</p>
               <ul className="artifact-list">

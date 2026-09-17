@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RedDiamondBtn from '../components/RedDiamondBtn';
 import ChapterTitle from '../components/ChapterTitle';
 import WaxSeal from '../components/WaxSeal';
 
 const Raven = ({ onNextPage }) => {
+  const [copiedNotification, setCopiedNotification] = useState(false);
+
+  const handleCopyEmail = (e) => {
+    // Allows user to click normally or copy
+    navigator.clipboard?.writeText('kuhukatarejk1@gmail.com');
+    setCopiedNotification(true);
+    setTimeout(() => setCopiedNotification(false), 3000);
+  };
+
   return (
     <div className="manuscript-viewport">
       <main className="raven-container">
@@ -37,20 +46,25 @@ const Raven = ({ onNextPage }) => {
           <div className="dispatch-grid">
             
             {/* Direct Email Link */}
-            <div className="dispatch-card">
+            <div className="dispatch-card interactive-dispatch-card">
               <span className="dispatch-symbol">🦉</span>
               <h3 className="dispatch-title">SEND A MESSAGE</h3>
               <p className="dispatch-subtitle">Direct Correspondence</p>
               <a 
                 href="mailto:kuhukatarejk1@gmail.com" 
                 className="dispatch-link"
+                onClick={handleCopyEmail}
+                title="Send an email or click to copy address"
               >
                 Send an Email
               </a>
+              {copiedNotification && (
+                <span className="dispatch-feedback">✦ Address Copied to Scribe Quill ✦</span>
+              )}
             </div>
 
             {/* GitHub Profile */}
-            <div className="dispatch-card">
+            <div className="dispatch-card interactive-dispatch-card">
               <span className="dispatch-symbol">⚔️</span>
               <h3 className="dispatch-title">THE FORGE REPOSITORIES</h3>
               <p className="dispatch-subtitle">GitHub Code Vault</p>
@@ -65,7 +79,7 @@ const Raven = ({ onNextPage }) => {
             </div>
 
             {/* LinkedIn Profile */}
-            <div className="dispatch-card">
+            <div className="dispatch-card interactive-dispatch-card">
               <span className="dispatch-symbol">📜</span>
               <h3 className="dispatch-title">THE COURT REGISTRY</h3>
               <p className="dispatch-subtitle">LinkedIn Profile</p>

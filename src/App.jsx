@@ -5,6 +5,8 @@ import Craft from './pages/Craft';
 import Works from './pages/Works';
 import Scrolls from './pages/Scrolls';
 import Raven from './pages/Raven';
+import JourneyHUD from './components/JourneyHUD';
+import AmbientLighting from './components/AmbientLighting';
 
 const App = () => {
   const [currentChapter, setCurrentChapter] = useState(0);
@@ -12,7 +14,13 @@ const App = () => {
   const [isMidnight, setIsMidnight] = useState(false);
   const audioRef = useRef(null);
 
-  // Handle the Music
+  // Smooth Chapter Navigation with auto-scroll to top
+  const handleSelectChapter = (index) => {
+    setCurrentChapter(index);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Handle the Music Playback
   const toggleMusic = () => {
     if (!audioRef.current) return;
 
@@ -25,10 +33,23 @@ const App = () => {
         .then(() => {
           setIsPlaying(true);
         })
-        .catch(err => {
-          console.log("Audio Error:", err);
+        .catch((err) => {
+          console.log("Audio Playback Notice:", err);
         });
     }
+  };
+
+  // Start music explicitly on user interaction (e.g. Prologue Begin Journey)
+  const startMusic = () => {
+    if (!audioRef.current) return;
+    audioRef.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((err) => {
+        console.log("Audio Playback Notice:", err);
+      });
   };
 
   // Handle the Midnight Theme
@@ -45,80 +66,82 @@ const App = () => {
     }
   }, [isMidnight]);
 
+  // Scroll to top on chapter change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentChapter]);
+
   const pages = [
-    <Prologue onNextPage={() => setCurrentChapter(1)} />,
-    <Wanderer onNextPage={() => setCurrentChapter(2)} />,
-    <Craft onNextPage={() => setCurrentChapter(3)} />,
-    <Works onNextPage={() => setCurrentChapter(4)} />,
-    <Scrolls onNextPage={() => setCurrentChapter(5)} />,
-    <Raven onNextPage={() => setCurrentChapter(0)} />
+    <Prologue 
+      key="prologue"
+      onNextPage={() => handleSelectChapter(1)} 
+      isPlaying={isPlaying}
+      onStartMusic={startMusic}
+    />,
+    <Wanderer 
+      key="wanderer"
+      onNextPage={() => handleSelectChapter(2)} 
+      isMidnight={isMidnight}
+    />,
+    <Craft 
+      key="craft"
+      onNextPage={() => handleSelectChapter(3)} 
+      isMidnight={isMidnight}
+    />,
+    <Works 
+      key="works"
+      onNextPage={() => handleSelectChapter(4)} 
+      isMidnight={isMidnight}
+    />,
+    <Scrolls 
+      key="scrolls"
+      onNextPage={() => handleSelectChapter(5)} 
+      isMidnight={isMidnight}
+    />,
+    <Raven 
+      key="raven"
+      onNextPage={() => handleSelectChapter(0)} 
+      isMidnight={isMidnight}
+    />
   ];
 
   return (
     <>
-      {/* Hidden Audio Player - MUST be here for sound to work */}
+      {/* Persistent Hidden Audio Player matching exact file name */}
       <audio
         ref={audioRef}
-        src="/blades-of-light-shadow/tune.mp3.mp3.mp3"
+        src={`${import.meta.env.BASE_URL}tune.mp3.mp3.mp3`}
         loop
         preload="auto"
       />
 
+      {/* Dynamic Light vs Shadow Cursor Follower */}
+      <AmbientLighting isMidnight={isMidnight} />
+
       {/* The Ancient Heavy Mist */}
-      <div className="ancient-fog"></div>
+      <div className="ancient-fog" style={{ pointerEvents: 'none' }} aria-hidden="true"></div>
+
+      {/* Interactive Game HUD & Journey Map System */}
+      <JourneyHUD
+        currentChapter={currentChapter}
+        onSelectChapter={handleSelectChapter}
+        isMidnight={isMidnight}
+        isPlaying={isPlaying}
+        toggleMusic={toggleMusic}
+        toggleTheme={toggleTheme}
+      />
 
       {/* The Global Inscription (Footer) */}
-      <div className="global-inscription">
+      <footer className="global-inscription">
         <span className="diamond-rune">♦</span>
         <span>THE CHRONICLE OF MAANYTA KATARE</span>
         <span className="diamond-rune">♦</span>
-      </div>
-      
-      {/* Global Control Buttons - Inline styles force perfect layout */}
-      <div
-        style={{
-          position: 'fixed',
-          top: '2rem',
-          right: '2rem',
-          display: 'flex',
-          gap: '1rem',
-          zIndex: 100,
-          alignItems: 'center'
-        }}
-      >
-        <button 
-          className="theme-toggle-btn" 
-          onClick={toggleTheme}
-          aria-label="Toggle Midnight Mode"
-          style={{
-            position: 'relative',
-            margin: 0,
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          {isMidnight ? '☀' : '☾'}
-        </button>
+      </footer>
 
-        <button 
-          className="music-toggle-btn" 
-          onClick={toggleMusic}
-          aria-label="Toggle Background Music"
-          style={{
-            position: 'relative',
-            margin: 0,
-            height: '32px',
-            display: 'flex',
-            alignItems: 'center'
-          }}
-        >
-          {isPlaying ? '☽ SILENCE' : '♫ SUMMON TUNE'}
-        </button>
+      {/* The Manuscript Page with Cinematic Chapter Transition */}
+      <div className="chapter-transition-wrapper key-fade">
+        {pages[currentChapter]}
       </div>
-
-      {/* The Manuscript Pages */}
-      {pages[currentChapter]}
     </>
   );
 };
