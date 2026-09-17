@@ -138,10 +138,12 @@ const App = () => {
       {/* Persistent Audio Player across all chapters & routes */}
       <audio
         ref={audioRef}
-        src={`${import.meta.env.BASE_URL}tune.mp3.mp3.mp3`}
         loop
         preload="auto"
-      />
+      >
+        <source src={`${import.meta.env.BASE_URL}tune.mp3.mp3.mp3`} type="audio/mpeg" />
+        <source src={`${import.meta.env.BASE_URL}tune.mp3`} type="audio/mpeg" />
+      </audio>
 
       {/* Dynamic Crimson & Shadow Cursor Follower */}
       <AmbientLighting isMidnight={isMidnight} />
