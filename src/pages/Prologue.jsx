@@ -3,26 +3,31 @@ import RedDiamondBtn from '../components/RedDiamondBtn';
 import ChapterTitle from '../components/ChapterTitle';
 import Rune from '../components/Rune';
 
-const Prologue = ({ onNextPage, onOpenMap, isPlaying, onStartMusic }) => {
+const Prologue = ({ onNextPage, onOpenMap, isPlaying, onStartMusic, isMidnight }) => {
   return (
-    <div className="manuscript-viewport">
-      <main className="prologue-container">
+    <div className="manuscript-viewport chamber-sky-realm">
+      <main className="prologue-container realm-chamber-card">
         
-        {/* Chapter Header */}
+        {/* Sanctuary Header */}
+        <div className="chamber-realm-tag">
+          <span className="realm-sigil">⚔️</span>
+          <span>SANCTUARY I • THE SKY REALM</span>
+        </div>
+
         <ChapterTitle 
           chapter="PROLOGUE" 
           title="BLADES OF LIGHT & SHADOW" 
         />
         <div className="subtitle">The Chronicle of Maanyta Katare</div>
 
-        {/* Decorative Divider */}
-        <div className="inscription-divider">
+        {/* Decorative Blood-Red Inscription Divider */}
+        <div className="inscription-divider crimson-divider">
           <span className="line"></span>
           <span className="diamond">♦</span>
           <span className="line"></span>
         </div>
 
-        {/* Prologue Story Text */}
+        {/* Prologue Story Text (Preserved 100% Verbatim) */}
         <article className="prologue-body">
           <p>
             <span className="drop-cap">T</span>here are stories that begin with a prophecy.
@@ -43,7 +48,7 @@ const Prologue = ({ onNextPage, onOpenMap, isPlaying, onStartMusic }) => {
           </p>
         </article>
 
-        {/* Ambient Sound Invitation (if music not yet playing) */}
+        {/* Ambient Sound Invitation (if music is paused) */}
         {!isPlaying && onStartMusic && (
           <div className="prologue-music-invitation">
             <button
@@ -52,30 +57,19 @@ const Prologue = ({ onNextPage, onOpenMap, isPlaying, onStartMusic }) => {
               aria-label="Begin Journey and summon background soundtrack"
             >
               <span className="summon-icon">♫</span>
-              <span>BEGIN JOURNEY • AWAKEN SOUNDTRACK</span>
+              <span>AWAKEN THE BARD'S TUNE • BEGIN JOURNEY</span>
             </button>
           </div>
         )}
 
       </main>
 
-      {/* Choice Moment Navigation */}
+      {/* Choice Waypoints */}
       <div className="prologue-choice-row">
         <RedDiamondBtn 
-          label="TURN THE PAGE" 
+          label="THE MISTBOUND PATH" 
           onClick={onNextPage} 
         />
-
-        {onOpenMap && (
-          <button
-            className="secondary-choice-btn"
-            onClick={onOpenMap}
-            aria-label="Consult the Chronicle Index"
-          >
-            <span className="choice-sigil">⚜</span>
-            <span className="choice-label">CONSULT THE CHRONICLE</span>
-          </button>
-        )}
       </div>
     </div>
   );

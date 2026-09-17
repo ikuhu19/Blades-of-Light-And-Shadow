@@ -106,16 +106,21 @@ const Scrolls = ({ onNextPage }) => {
   });
 
   return (
-    <div className="manuscript-viewport">
-      <div className="scrolls-container">
+    <div className="manuscript-viewport chamber-scriptorium">
+      <div className="scrolls-container realm-chamber-card">
 
-        {/* Chapter Header */}
+        {/* Sanctuary Header */}
+        <div className="chamber-realm-tag">
+          <span className="realm-sigil">📜</span>
+          <span>SANCTUARY V • THE SCRIPTORIUM ARCHIVES</span>
+        </div>
+
         <ChapterTitle 
           chapter="CHAPTER V" 
           title="THE SCROLLS" 
         />
 
-        {/* Story Intro */}
+        {/* Story Intro (Preserved Verbatim) */}
         <article className="story-layer text-center">
           <p className="story-paragraph">
             Code builds the structures of our world, but words give them meaning. 
@@ -125,14 +130,14 @@ const Scrolls = ({ onNextPage }) => {
         </article>
 
         {/* Inscription Divider */}
-        <div className="inscription-divider">
+        <div className="inscription-divider crimson-divider">
           <span className="line"></span>
           <span className="diamond">♦</span>
           <span className="line"></span>
         </div>
 
         {/* Manuscripts Scriptorium */}
-        <section className="scrolls-scriptorium">
+        <section className="scrolls-scriptorium library-sanctum">
           <h2 className="record-heading">THE MANUSCRIPTS OF THE SCRIPTORIUM</h2>
 
           {/* Interactive Category Filter */}
@@ -163,11 +168,11 @@ const Scrolls = ({ onNextPage }) => {
             </button>
           </div>
           
-          <div className="scrolls-grid">
+          <div className="scrolls-grid scriptorium-grid">
             {filteredScrolls.map((scroll, index) => (
               <article
                 key={index}
-                className="scroll-card interactive-scroll-card"
+                className="scroll-card gothic-manuscript-card"
                 onClick={() => setSelectedScroll(scroll)}
                 role="button"
                 tabIndex={0}
@@ -177,7 +182,7 @@ const Scrolls = ({ onNextPage }) => {
                 <div className="scroll-header">
                   <div className="scroll-header-top">
                     <span className="scroll-number">{scroll.number}</span>
-                    <span className="unfurl-hint">📜 UNFURL</span>
+                    <span className="unfurl-hint">📜 UNFURL MANUSCRIPT</span>
                   </div>
                   <h3 className="scroll-title">{scroll.title}</h3>
                 </div>
@@ -202,7 +207,7 @@ const Scrolls = ({ onNextPage }) => {
             aria-label={selectedScroll.title}
           >
             <div
-              className="scroll-modal-container"
+              className="scroll-modal-container scriptorium-modal"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="scroll-modal-header">
@@ -218,7 +223,7 @@ const Scrolls = ({ onNextPage }) => {
 
               <h2 className="scroll-modal-title">{selectedScroll.title}</h2>
               
-              <div className="scroll-modal-divider">
+              <div className="scroll-modal-divider crimson-divider">
                 <span className="line"></span>
                 <span className="diamond">♦</span>
                 <span className="line"></span>
@@ -250,7 +255,7 @@ const Scrolls = ({ onNextPage }) => {
         {/* Navigation Button Wrapper */}
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%', margin: '40px 0' }}>
           <RedDiamondBtn 
-            label="THE RAVEN" 
+            label="THE ORACLE CHAMBER" 
             onClick={onNextPage} 
           />
         </div>

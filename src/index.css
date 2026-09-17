@@ -473,19 +473,21 @@
    ========================================== */
 
 :root {
-  --bg-obsidian: #0B0908;
-  --paper-center: #5A3A28;
-  --paper-mid: #4A3024;
-  --paper-dark: #3B2920;
-  --paper-burnt: #1C120C;
+  --bg-obsidian: #09070A;
+  --stone-dark: #120E13;
+  --stone-charcoal: #18141A;
+  --stone-slate: #241E26;
+  --cloud-ivory: #ECE8E1;
+  --cloud-fog: #A4B0BE;
   
-  --text-primary: #D7C29D;
-  --text-heading: #E1D4B8;
-  --accent-gold: #A8874C;
-  --accent-rust: #76251C;
-  --accent-crimson: #4A1515;
-  --button-red: #671B1B;
-  --button-red-hover: #8C2323;
+  --text-primary: #E2DDD5;
+  --text-heading: #F5F3EF;
+  --accent-gold: #C5A059;
+  --accent-crimson: #B31919;
+  --accent-crimson-glow: #E84118;
+  --accent-rust: #8A2B20;
+  --button-red: #7E1515;
+  --button-red-hover: #A51D24;
 }
 
 body, html {
@@ -499,38 +501,33 @@ body, html {
   overflow-x: hidden;
 }
 
-/* FULL SCREEN BURNT COFFEE PARCHMENT VIEWPORT */
+/* CINEMATIC REALM VIEWPORT WITH VOLUMETRIC MIST & 3D CANVAS INTEGRATION */
 .manuscript-viewport {
   position: relative;
   min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
   background: 
-    /* Coffee Stain 1 - Top Left */
-    radial-gradient(circle at 15% 20%, rgba(28, 18, 12, 0.85) 0%, rgba(28, 18, 12, 0) 45%),
-    /* Coffee Stain 2 - Bottom Right Ring */
-    radial-gradient(circle at 85% 80%, rgba(45, 26, 17, 0.7) 0%, rgba(74, 48, 36, 0.2) 30%, transparent 50%),
-    /* Vignette Burn around all screen edges */
-    radial-gradient(ellipse at center, transparent 40%, rgba(28, 18, 12, 0.7) 75%, var(--bg-obsidian) 100%),
-    /* Base Parchment Color Flow */
-    radial-gradient(ellipse at 50% 40%, var(--paper-center) 0%, var(--paper-mid) 50%, var(--paper-dark) 85%, var(--paper-burnt) 100%);
+    radial-gradient(circle at 50% 15%, rgba(179, 25, 25, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(9, 7, 10, 0.7) 80%, var(--bg-obsidian) 100%),
+    linear-gradient(180deg, rgba(9, 7, 10, 0.55) 0%, rgba(18, 14, 19, 0.65) 50%, rgba(9, 7, 10, 0.85) 100%);
   
-  padding: 4rem 2rem;
+  padding: 5rem 2rem 4rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-/* SUBTLE PAPER GRAIN OVERLAY */
+/* SUBTLE PAPER & DUST GRAIN OVERLAY */
 .manuscript-viewport::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 0);
-  background-size: 4px 4px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 5px 5px;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.35;
 }
 
 /* ==========================================
@@ -1851,4 +1848,568 @@ body.midnight-mode .scroll-modal-container {
   .chapter-transition-wrapper.key-fade {
     animation: none !important;
   }
+}
+
+/* ==========================================================================
+   CINEMATIC 3D FANTASY OPENING HERO & WORLD SCENE
+   ========================================================================== */
+
+.cinematic-opening-hero {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-opening-hero.flight-active {
+  opacity: 0;
+  transform: scale(1.15) translateY(-30px);
+  pointer-events: none;
+}
+
+.hero-atmosphere-vignette {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 30%, transparent 20%, rgba(9, 7, 10, 0.5) 60%, rgba(9, 7, 10, 0.95) 100%),
+    linear-gradient(180deg, rgba(9, 7, 10, 0.3) 0%, transparent 40%, rgba(9, 7, 10, 0.8) 100%);
+  pointer-events: none;
+}
+
+.hero-content-frame {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  background: rgba(14, 11, 15, 0.72);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.9),
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(179, 25, 25, 0.15);
+  backdrop-filter: blur(10px);
+  animation: heroFrameEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes heroFrameEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-realm-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.badge-gem {
+  color: var(--accent-crimson-glow);
+  font-size: 0.65rem;
+  text-shadow: 0 0 8px var(--accent-crimson-glow);
+}
+
+.hero-grand-title {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  letter-spacing: 0.15em;
+  color: var(--text-heading);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 
+    0 0 20px rgba(232, 65, 24, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.hero-grand-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  font-style: italic;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-divider-rune {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0.4rem 0;
+}
+
+.rune-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.rune-sigil {
+  color: var(--accent-crimson-glow);
+  font-size: 1.1rem;
+  text-shadow: 0 0 10px rgba(232, 65, 24, 0.8);
+}
+
+.hero-lore-caption {
+  font-family: 'Faustina', serif;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.8;
+  color: var(--cloud-ivory);
+  max-width: 680px;
+  margin: 0;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+  opacity: 0.9;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.hero-enter-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #7E1515 0%, #A51D24 50%, #5E0F0F 100%);
+  border: 1px solid var(--accent-gold);
+  color: #FFFFFF;
+  font-family: 'Cinzel', serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.28em;
+  padding: 1.1rem 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 2px;
+  box-shadow: 
+    0 0 25px rgba(179, 25, 25, 0.6),
+    inset 0 0 15px rgba(232, 65, 24, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-enter-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 0 40px rgba(232, 65, 24, 0.8),
+    inset 0 0 25px rgba(255, 255, 255, 0.4);
+  border-color: #FFFFFF;
+}
+
+.enter-btn-icon {
+  font-size: 1.15rem;
+}
+
+.hero-skip-btn {
+  background: none;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  color: var(--cloud-fog);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  padding: 0.45rem 1rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+
+.hero-skip-btn:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  background: rgba(14, 11, 15, 0.6);
+}
+
+/* ==========================================================================
+   MAGICAL QUEST COMPASS HUD
+   ========================================================================== */
+
+.magical-hud-compass-anchor {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 2147483645;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.hud-compass-btn {
+  background: rgba(14, 11, 15, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  color: var(--accent-gold);
+  font-family: 'Cinzel', serif;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 3px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    inset 0 0 10px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.hud-compass-btn:hover {
+  border-color: var(--accent-crimson-glow);
+  box-shadow: 
+    0 0 16px rgba(232, 65, 24, 0.4),
+    0 4px 20px rgba(0, 0, 0, 0.9);
+  transform: translateY(-1px);
+}
+
+.compass-dial {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(179, 25, 25, 0.25);
+  box-shadow: 0 0 8px rgba(179, 25, 25, 0.4);
+}
+
+.compass-needle {
+  color: var(--accent-crimson-glow);
+  font-size: 0.75rem;
+  animation: needleRotate 8s linear infinite;
+}
+
+@keyframes needleRotate {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hud-location-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hud-location-roman {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-crimson-glow);
+  text-transform: uppercase;
+}
+
+.hud-location-title {
+  font-size: 0.76rem;
+  letter-spacing: 0.15em;
+  color: var(--text-heading);
+  text-transform: uppercase;
+}
+
+.hud-map-arrow {
+  font-size: 0.55rem;
+  opacity: 0.7;
+}
+
+.hud-crimson-progress-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.hud-crimson-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #B31919, #E84118, #C5A059);
+  box-shadow: 0 0 6px #E84118;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stepper Waypoint Controls */
+.hud-chamber-stepper {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.7rem;
+  z-index: 2147483640;
+}
+
+.stepper-waypoint-btn {
+  background: rgba(14, 11, 15, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: var(--text-primary);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.stepper-waypoint-btn:hover {
+  border-color: var(--accent-crimson-glow);
+  color: #FFFFFF;
+  background: rgba(179, 25, 25, 0.3);
+  box-shadow: 0 0 12px rgba(232, 65, 24, 0.4);
+  transform: translateY(-2px);
+}
+
+.hud-world-view-btn {
+  background: rgba(14, 11, 15, 0.8);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  color: var(--accent-gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hud-world-view-btn:hover {
+  border-color: var(--accent-crimson-glow);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   REALM CHAMBER CARDS & SANCTUARY ARCHITECTURE
+   ========================================================================== */
+
+.realm-chamber-card {
+  background: rgba(14, 11, 15, 0.82) !important;
+  border: 1px solid rgba(197, 160, 89, 0.35) !important;
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.85),
+    inset 0 0 30px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(179, 25, 25, 0.12) !important;
+  backdrop-filter: blur(12px);
+  padding: 2.5rem !important;
+  border-radius: 3px;
+}
+
+.chamber-realm-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-crimson-glow);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.crimson-divider .diamond {
+  color: var(--accent-crimson-glow);
+  text-shadow: 0 0 8px rgba(232, 65, 24, 0.8);
+}
+
+.crimson-divider .line {
+  background: linear-gradient(90deg, transparent, var(--accent-crimson), transparent);
+}
+
+/* ==========================================================================
+   PORTAL GALLERY (WORKS) & GOTHIC CARDS
+   ========================================================================== */
+
+.gothic-portal-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.35) !important;
+  background: linear-gradient(135deg, rgba(18, 14, 19, 0.9) 0%, rgba(10, 8, 11, 0.95) 100%) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+}
+
+.gothic-portal-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-crimson-glow), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gothic-portal-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: var(--accent-crimson-glow) !important;
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(232, 65, 24, 0.35) !important;
+}
+
+.gothic-portal-card:hover::before {
+  opacity: 1;
+}
+
+.crimson-portal-btn {
+  background: linear-gradient(135deg, #7E1515 0%, #A51D24 100%) !important;
+  border-color: var(--accent-gold) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(232, 65, 24, 0.5) !important;
+}
+
+.crimson-portal-btn:hover {
+  box-shadow: 0 0 25px rgba(232, 65, 24, 0.8) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Monolith Record (Wanderer) */
+.monolith-record {
+  background: rgba(14, 11, 15, 0.8) !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+}
+
+/* Armory Relics (Craft) */
+.relic-vault-card {
+  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+  background: rgba(14, 11, 15, 0.75) !important;
+  transition: all 0.3s ease;
+}
+
+.relic-vault-card:hover {
+  border-color: var(--accent-crimson-glow) !important;
+  box-shadow: 0 0 15px rgba(232, 65, 24, 0.3) !important;
+}
+
+.relic-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.relic-icon {
+  font-size: 1.1rem;
+}
+
+/* Scriptorium (Scrolls) */
+.gothic-manuscript-card {
+  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+  background: rgba(14, 11, 15, 0.78) !important;
+  transition: all 0.3s ease;
+}
+
+.gothic-manuscript-card:hover {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 15px rgba(197, 160, 89, 0.35) !important;
+  transform: translateY(-3px);
+}
+
+/* Oracle Dispatch (Raven) */
+.altar-dispatch-card {
+  border: 1px solid rgba(197, 160, 89, 0.35) !important;
+  background: rgba(14, 11, 15, 0.8) !important;
+  transition: all 0.3s ease;
+}
+
+.altar-dispatch-card:hover {
+  border-color: var(--accent-crimson-glow) !important;
+  box-shadow: 0 0 15px rgba(232, 65, 24, 0.35) !important;
+  transform: translateY(-3px);
+}
+
+.dispatch-altar-btn {
+  background: rgba(126, 21, 21, 0.6) !important;
+  border: 1px solid var(--accent-gold) !important;
+  color: #FFFFFF !important;
+}
+
+.dispatch-altar-btn:hover {
+  background: #A51D24 !important;
+  box-shadow: 0 0 15px rgba(232, 65, 24, 0.5) !important;
+}
+
+/* Quest Map Chamber Styling */
+.fantasy-realm-map {
+  background: linear-gradient(135deg, rgba(20, 15, 21, 0.98) 0%, rgba(10, 8, 11, 0.99) 100%) !important;
+  border: 1px solid var(--accent-gold) !important;
+}
+
+.crimson-eclipse-sigil {
+  color: var(--accent-crimson-glow);
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px rgba(232, 65, 24, 0.8);
+}
+
+.map-chapter-item.is-active-chamber {
+  border-color: var(--accent-crimson-glow) !important;
+  background: rgba(179, 25, 25, 0.22) !important;
+  box-shadow: 0 0 15px rgba(232, 65, 24, 0.35);
+}
+
+.chamber-sigil-badge {
+  font-size: 1.4rem;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chamber-name {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.chamber-short-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-crimson-glow);
+}
+
+.chamber-full-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--text-heading);
+}
+
+.chamber-active-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-crimson-glow);
+  border: 1px solid var(--accent-crimson-glow);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
 }

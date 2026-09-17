@@ -116,16 +116,21 @@ const Works = ({ onNextPage }) => {
   });
 
   return (
-    <div className="manuscript-viewport">
-      <main className="works-container">
+    <div className="manuscript-viewport chamber-portal-gallery">
+      <main className="works-container realm-chamber-card">
         
-        {/* Chapter Header */}
+        {/* Sanctuary Header */}
+        <div className="chamber-realm-tag">
+          <span className="realm-sigil">🌀</span>
+          <span>SANCTUARY IV • THE PORTAL GALLERY</span>
+        </div>
+
         <ChapterTitle 
           chapter="CHAPTER IV" 
           title="THE WORKS" 
         />
 
-        {/* Story Intro */}
+        {/* Story Intro (Preserved Verbatim) */}
         <article className="story-layer text-center">
           <p className="story-paragraph">
             Every line of code is an inscription upon the world. Here lie the artifacts 
@@ -135,14 +140,14 @@ const Works = ({ onNextPage }) => {
         </article>
 
         {/* Inscription Divider */}
-        <div className="inscription-divider">
+        <div className="inscription-divider crimson-divider">
           <span className="line"></span>
           <span className="diamond">♦</span>
           <span className="line"></span>
         </div>
 
         {/* Projects Archive */}
-        <section className="works-archive">
+        <section className="works-archive portal-vault-archive">
           <h2 className="record-heading">THE ARCHIVE OF ARTIFACTS</h2>
 
           {/* Interactive Realm Filter Choice */}
@@ -157,7 +162,7 @@ const Works = ({ onNextPage }) => {
               className={`choice-pill ${filter === 'WEB' ? 'active' : ''}`}
               onClick={() => setFilter('WEB')}
             >
-              WEB & APPLICATION REALMS
+              WEB & APPLICATION PORTALS
             </button>
             <button
               className={`choice-pill ${filter === 'LOGIC' ? 'active' : ''}`}
@@ -167,21 +172,22 @@ const Works = ({ onNextPage }) => {
             </button>
           </div>
           
-          <div className="works-grid">
+          <div className="works-grid portals-grid">
             {filteredArtifacts.map((artifact) => (
               <div
                 key={artifact.id}
-                className="work-card interactive-relic-card"
+                className="work-card gothic-portal-card"
                 onClick={() => setSelectedArtifact(artifact)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && setSelectedArtifact(artifact)}
-                aria-label={`Inspect ${artifact.title}`}
+                aria-label={`Enter Portal for ${artifact.title}`}
               >
+                <div className="portal-arch-glow" />
                 <div className="work-header">
                   <div className="work-header-top">
                     <span className="work-number">{artifact.number}</span>
-                    <span className="inspect-sigil-hint">✦ DISCOVER</span>
+                    <span className="inspect-sigil-hint">✦ STEP THROUGH</span>
                   </div>
                   <h3 className="work-title">{artifact.title}</h3>
                 </div>
@@ -197,17 +203,17 @@ const Works = ({ onNextPage }) => {
 
       </main>
 
-      {/* Artifact Inspection Parchment Modal */}
+      {/* Artifact Portal Inspection Modal */}
       {selectedArtifact && (
         <div
-          className="artifact-modal-overlay"
+          className="artifact-modal-overlay portal-modal-overlay"
           onClick={() => setSelectedArtifact(null)}
           role="dialog"
           aria-modal="true"
           aria-label={selectedArtifact.title}
         >
           <div
-            className="artifact-modal-container"
+            className="artifact-modal-container portal-chamber-modal"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="artifact-modal-header">
@@ -215,7 +221,7 @@ const Works = ({ onNextPage }) => {
               <button
                 className="modal-close-btn"
                 onClick={() => setSelectedArtifact(null)}
-                aria-label="Close Relic Inspection"
+                aria-label="Close Portal"
               >
                 ✕
               </button>
@@ -236,15 +242,15 @@ const Works = ({ onNextPage }) => {
                 href={selectedArtifact.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="dispatch-link inspect-open-btn"
+                className="dispatch-link inspect-open-btn crimson-portal-btn"
               >
-                ⚔️ EXPLORE THE REPOSITORY VAULT
+                ⚔️ STEP THROUGH PORTAL • OPEN GITHUB VAULT
               </a>
               <button
                 className="inspect-return-btn"
                 onClick={() => setSelectedArtifact(null)}
               >
-                RETURN TO ARCHIVE
+                RETURN TO GALLERY
               </button>
             </div>
           </div>
@@ -253,7 +259,7 @@ const Works = ({ onNextPage }) => {
 
       {/* Navigation Button */}
       <RedDiamondBtn 
-        label="THE SCROLLS" 
+        label="THE SCRIPTORIUM" 
         onClick={onNextPage} 
       />
     </div>

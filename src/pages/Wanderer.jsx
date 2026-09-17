@@ -6,27 +6,32 @@ import OwlCanvas from '../components/OwlCanvas';
 
 const Wanderer = ({ onNextPage, isMidnight }) => {
   return (
-    <div className="manuscript-viewport">
-      <main className="wanderer-container">
+    <div className="manuscript-viewport chamber-mistbound-path">
+      <main className="wanderer-container realm-chamber-card">
         
-        {/* Chapter Header */}
+        {/* Sanctuary Header */}
+        <div className="chamber-realm-tag">
+          <span className="realm-sigil">🦉</span>
+          <span>SANCTUARY II • THE MISTBOUND PATH</span>
+        </div>
+
         <ChapterTitle 
           chapter="CHAPTER II" 
           title="THE WANDERER" 
         />
 
-        {/* Core Narrative & Illustration Section */}
+        {/* Core Narrative & 3D Battlement Section */}
         <section className="wanderer-main-grid">
           
-          {/* Left: Illustration Frame with 3D Guardian Owl */}
-          <div className="illustration-frame">
+          {/* Left: Ancient Stone Battlement with 3D Guardian Owl */}
+          <div className="illustration-frame battlement-perch-frame">
             <div className="illustration-placeholder owl-3d-stage">
               <OwlCanvas isMidnight={isMidnight} />
               <p className="frame-caption">The Traveler at the Crossroads</p>
             </div>
           </div>
 
-          {/* Right: The Story Layer */}
+          {/* Right: The Story Layer (Preserved Verbatim) */}
           <article className="story-layer">
             <p className="story-paragraph">
               <span className="drop-cap">N</span>ot all who walk the realm were 
@@ -34,12 +39,12 @@ const Wanderer = ({ onNextPage, isMidnight }) => {
               far from courtly halls, in a world quiet enough to hear the echoes 
               of unanswered questions.
             </p>
-           <p className="story-paragraph">
-            I chose the path of the scholar-scribe—seeking mastery over the ancient 
-            runes of logic and code, commanding complex systems from <Rune secret="CREATE DATABASE Employee; -- Structuring the chaos">broken foundations</Rune> 
-            to towering structures. Through every broken build mended and every algorithm 
-            conquered, I learned that <Rune secret="while (fails < 100) { tryAgain(); }">victory belongs to those with patience</Rune>.
-          </p>
+            <p className="story-paragraph">
+              I chose the path of the scholar-scribe—seeking mastery over the ancient 
+              runes of logic and code, commanding complex systems from <Rune secret="CREATE DATABASE Employee; -- Structuring the chaos">broken foundations</Rune> 
+              to towering structures. Through every broken build mended and every algorithm 
+              conquered, I learned that <Rune secret="while (fails < 100) { tryAgain(); }">victory belongs to those with patience</Rune>.
+            </p>
             <p className="story-paragraph">
               Yet logic alone makes for a cold kingdom. Alongside the discipline of technology, 
               I carry the art of story—the power to give thought a form, and imagination a domain. 
@@ -51,14 +56,14 @@ const Wanderer = ({ onNextPage, isMidnight }) => {
         </section>
 
         {/* Divider */}
-        <div className="inscription-divider">
+        <div className="inscription-divider crimson-divider">
           <span className="line"></span>
           <span className="diamond">♦</span>
           <span className="line"></span>
         </div>
 
-        {/* The Information Layer (Recruiter / Traveller Record) */}
-        <section className="traveller-record">
+        {/* The Traveller's Record (Carved Monolith Slab) */}
+        <section className="traveller-record monolith-record">
           <h2 className="record-heading">THE TRAVELLER'S RECORD</h2>
           
           <div className="record-grid">
@@ -88,7 +93,7 @@ const Wanderer = ({ onNextPage, isMidnight }) => {
 
       {/* Navigation Button */}
       <RedDiamondBtn 
-        label="THE CRAFT" 
+        label="THE ARSENAL" 
         onClick={onNextPage} 
       />
     </div>
